@@ -1,0 +1,14 @@
+services:
+  app:
+    build: .
+    image: node-cicd
+    restart: unless-stopped
+    environment:
+      PORT: 8080
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
